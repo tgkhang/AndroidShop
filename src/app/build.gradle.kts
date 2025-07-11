@@ -7,6 +7,10 @@ plugins {
     //alias(libs.plugins.kotlin.kapt) // for room db
 
     id("com.google.devtools.ksp")
+
+    //already
+    //id("com.android.application") 
+    //id("com.google.gms.google-services")
 }
 
 android {
@@ -78,7 +82,15 @@ dependencies {
     //coroutine, gson
 
 
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+
+
     //Coil
+    //https://coil-kt.github.io/coil/
     implementation("io.coil-kt.coil3:coil-compose:3.2.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
 
