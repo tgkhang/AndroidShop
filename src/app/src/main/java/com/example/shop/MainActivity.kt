@@ -12,17 +12,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.shop.ui.theme.ShopTheme
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 //TO DO on resume, on start, 
 
 class MainActivity : ComponentActivity() {
+      private lateinit var auth: FirebaseAuth
+      private lateinit var db: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //Bundle in android is a key value map used to pass data between activity, fragment to save state
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        //some config
-
+        //Initialize Firebase
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         setContent {
             ShopTheme {

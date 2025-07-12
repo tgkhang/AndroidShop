@@ -2,15 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-
     alias(libs.plugins.google.service)
-    //alias(libs.plugins.kotlin.kapt) // for room db
-
-    id("com.google.devtools.ksp")
-
-    //already
-    //id("com.android.application") 
-    //id("com.google.gms.google-services")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -71,6 +64,11 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // Navigation
+    implementation(libs.navigation.compose)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,33 +77,20 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    //coroutine, gson
+    // Firebase - Use BOM for consistent versions
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore.ktx)
 
+    // Image loading
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
-    // Import the Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
-    // TODO: Add the dependencies for Firebase products you want to use
-    // When using the BoM, don't specify versions in Firebase dependencies
-    implementation("com.google.firebase:firebase-analytics")
+    // Room database
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
 
-
-    //Coil
-    //https://coil-kt.github.io/coil/
-    implementation("io.coil-kt.coil3:coil-compose:3.2.0")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.2.0")
-
-    //Room db
-    val room_version = "2.7.2"
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-
-    //facebook login
-    implementation ("com.facebook.android:facebook-login:latest.release")
-
-    // https://cloudinary.com/documentation/android_quickstart
-    //implementation("com.cloudinary:cloudinary-android:3.0.2")
-    //implementation("com.github.bumptech.glide:glide:4.16.0")
-    //implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    //implementation("androidx.navigation:navigation-fragment:2.7.7")
-    //implementation("androidx.navigation:navigation-ui:2.7.7")
+    // Facebook login
+    implementation(libs.facebook.login)
 }
